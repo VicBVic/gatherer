@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:clean_our_cities/postare.dart'
+import 'package:clean_our_cities/postare.dart';
   
 void main() {
   runApp(const MyApp());
@@ -14,7 +14,8 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData.dark(),
       darkTheme: ThemeData.dark(),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const,
+      //home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
