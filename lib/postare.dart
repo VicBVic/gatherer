@@ -22,7 +22,7 @@ class _PostareState extends State<Postare> {
             child: Center(
               child: Text(
                 "Look at this",
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.headline4,
               ),
             ),
           ),
@@ -32,6 +32,10 @@ class _PostareState extends State<Postare> {
             child: Image.network(
                 "https://www.kindpng.com/picc/m/503-5036977_trollface-png-transparent-images-troll-face-front-view.png",
             ),
+          ),
+          Row(
+            children: [
+            ],
           ),
         ],
       ),
