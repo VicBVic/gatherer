@@ -10,6 +10,11 @@ class ShareButton extends StatefulWidget {
 class _ShareButtonState extends State<ShareButton> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return TextButton(
+      onPressed: (){},
+      child: const Icon(
+        Icons.share,
+      ),
+    );
   }
 }
