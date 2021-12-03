@@ -10,6 +10,11 @@ class CommentsButton extends StatefulWidget {
 class _CommentsButtonState extends State<CommentsButton> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return TextButton(
+      onPressed: (){},
+      child: const Icon(
+        Icons.comment,
+      ),
+    );
   }
 }
