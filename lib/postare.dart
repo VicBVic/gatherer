@@ -19,12 +19,10 @@ class _PostareState extends State<Postare> {
         children: [
           Container(
             color: Theme.of(context).primaryColor,
-            child: const Center(
+            child: Center(
               child: Text(
                 "Look at this",
-                style: TextStyle(
-                  fontSize: 15.0,
-                ),
+                style: Theme.of(context).textTheme.headline6,
               ),
             ),
           ),
@@ -32,8 +30,7 @@ class _PostareState extends State<Postare> {
             color: Theme.of(context).primaryColor,
             padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
             child: Image.network(
-                "https://clipart-best.com/img/trollface/trollface-clip-art-7.png",
-
+                "https://www.kindpng.com/picc/m/503-5036977_trollface-png-transparent-images-troll-face-front-view.png",
             ),
           ),
         ],
