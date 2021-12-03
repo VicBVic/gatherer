@@ -16,10 +16,19 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData.from(
         colorScheme:getMainColorScheme(),
-        textTheme: ThemeData.dark().textTheme
+        textTheme: ThemeData.dark().textTheme,
       ),
-      darkTheme: ThemeData.dark(),
-      home: Postare(title:"We do alittle bit of a little bit of a little bit"),
+      darkTheme: ThemeData(),
+      home: CustomScrollView(
+        slivers: [
+          SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (BuildContext context, int index){
+              return Postare(title:"Trol $index");
+            }),
+          ),
+        ],
+      ),
     );
   }
 }

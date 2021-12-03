@@ -17,13 +17,17 @@ class _PostareState extends State<Postare> {
   @override
   Widget build(BuildContext context) {
     return Container(
-
+      color: Theme.of(context).colorScheme.background,
       child:Column(
+
+
+
+
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
-            //color: Theme.of(context).colorScheme.primaryVariant,
+            color: Theme.of(context).colorScheme.primary,
             child: Center(
               child: Text(
                 widget.postTitle,
@@ -32,19 +36,22 @@ class _PostareState extends State<Postare> {
             ),
           ),
           Container(
-            //color: Theme.of(context).colorScheme.primaryVariant,
+            color: Theme.of(context).colorScheme.primary,
             padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
             child: Image.network(
                 "https://www.kindpng.com/picc/m/503-5036977_trollface-png-transparent-images-troll-face-front-view.png",
             ),
           ),
-          Row(
+          Container(
+            color:Theme.of(context).colorScheme.secondary,
+            child: Row(
 
-            children: [
-              LikeButton(),
-              CommentsButton(),
-              ShareButton(),
-            ],
+              children: [
+                LikeButton(),
+                CommentsButton(),
+                ShareButton(),
+              ],
+            ),
           ),
         ],
       ),
