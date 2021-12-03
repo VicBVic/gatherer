@@ -37,8 +37,34 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  List <Postare> listaCuPostari=[Postare(),Postare()];
+
+  void _adaugaPostare()
+  {
+    listaCuPostari.add(Postare());
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Postare();
+    return Scaffold(
+      body: Container(
+        child: CustomScrollView(
+          slivers: [
+            SliverList(
+              delegate: SliverChildListDelegate(
+                  listaCuPostari
+              ),
+            ),
+          ],
+        ),
+      ),
+      appBar: AppBar(
+        title: Text('Octavian e jmek'),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _adaugaPostare,
+      ),
+    );
   }
 }
+
