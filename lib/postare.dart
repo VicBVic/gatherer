@@ -12,17 +12,29 @@ class _PostareState extends State<Postare> {
   Widget build(BuildContext context) {
     return Container(
 
-      color: Colors.white,
+      color: Theme.of(context).colorScheme.background,
       child:Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            "Look at this"
+          Container(
+            color: Theme.of(context).primaryColor,
+            child: const Center(
+              child: Text(
+                "Look at this",
+                style: TextStyle(
+                  fontSize: 15.0,
+                ),
+              ),
+            ),
           ),
-          Image.network(
-              "https://clipart-best.com/img/trollface/trollface-clip-art-7.png",
+          Container(
+            color: Theme.of(context).primaryColor,
+            padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
+            child: Image.network(
+                "https://clipart-best.com/img/trollface/trollface-clip-art-7.png",
 
+            ),
           ),
         ],
       ),
