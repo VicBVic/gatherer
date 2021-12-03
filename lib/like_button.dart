@@ -11,10 +11,14 @@ class LikeButton extends StatefulWidget {
 class _LikeButtonState extends State<LikeButton> {
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: (){},
-      child: const Icon(
-        Icons.favorite,
+    return Flexible(
+      fit:FlexFit.tight,
+      child: ElevatedButton(
+        onPressed: (){},
+        child: const Icon(
+          Icons.favorite,
+        ),
+        style:Theme.of(context).elevatedButtonTheme.style,
       ),
     );
   }
