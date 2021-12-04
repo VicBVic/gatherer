@@ -73,10 +73,10 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
           {
             "email" : email.text,
             "user": user.text,
-            "FirstName" : fname.text,
-            "LastName" : lname.text,
+            "firstName" : fname.text,
+            "fastName" : lname.text,
             "age" : age.text,
-            "phone number" : phone.text,
+            "phoneNumber" : phone.text,
           }
         );
     } catch(error){
@@ -124,10 +124,9 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
             title: const Text("Clean our city"),
           ),
           body: Center(
-            child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Container(
-                  constraints: const BoxConstraints(maxWidth: 300),
+            child: Container(
+                constraints: const BoxConstraints(maxWidth: 300),
+                child: SingleChildScrollView(
                   child: Column(
                     children: [
                       TextField(
