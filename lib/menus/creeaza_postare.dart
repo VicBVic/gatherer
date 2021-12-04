@@ -109,7 +109,7 @@ class _FormDeCreeareState extends State<FormDeCreeare> {
         children: <Widget>[
           TextFormField(
             decoration: const InputDecoration(
-              icon: const Icon(Icons.person),
+              icon: Icon(Icons.person),
               hintText: 'Enter post title',
               labelText: 'Title'
             ),
@@ -139,9 +139,9 @@ class _FormDeCreeareState extends State<FormDeCreeare> {
           Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.only(top: 20.0),
-            child:  ElevatedButton(
+            child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                fixedSize: Size(200, 50),
+                fixedSize: const Size(200, 50),
               ),
               child: const Icon(Icons.camera_alt),
               onPressed: getImage,

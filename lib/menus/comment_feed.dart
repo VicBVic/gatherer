@@ -1,4 +1,5 @@
 import 'package:clean_our_cities/comentariu.dart';
+import 'package:clean_our_cities/menus/main_feed.dart';
 import 'package:flutter/material.dart';
 import 'package:clean_our_cities/post/postare.dart';
 
@@ -12,9 +13,8 @@ class CommentFeed extends StatefulWidget {
 class _CommentFeedState extends State<CommentFeed> {
   @override
   Widget build(BuildContext context) {
-    return Material(
-       child: CustomScrollView(
-
+    return Scaffold(
+      body: CustomScrollView(
         slivers: [
           SliverAppBar(
             floating: true,
@@ -30,10 +30,20 @@ class _CommentFeedState extends State<CommentFeed> {
           SliverList(
             delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index){
-                      return Comentariu(comment:"Comment $index", author: "Author $index",);
+                  return Comentariu(comment:"Comment $index", author: "Author $index",);
                 }),
           ),
         ],
+      ),
+      bottomSheet: TextFormField(
+        decoration: const InputDecoration(
+          icon: Icon(Icons.comment),
+          hintText: 'Enter comment',
+          labelText: 'Enter a comment',
+        ),
+        onSaved: (String? value) {
+
+        },
       ),
     );
   }
