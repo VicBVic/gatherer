@@ -1,18 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-final email=TextEditingController();
-final pass=TextEditingController();
-
-void _createUser(){
-  FirebaseAuth auth= FirebaseAuth.instance;
-  auth.createUserWithEmailAndPassword(email: email.text, password: pass.text);
-}
+import 'package:flutter/services.dart';
 
 void main(){
-  WidgetsFlutterBinding.ensureInitialized();
   runApp(const SignUp());
 }
 
@@ -24,6 +15,52 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
+
+  final email=TextEditingController();
+  final pass=TextEditingController();
+
+  String emailError = "";
+  String passError = "";
+
+  bool disable=false;
+
+  FirebaseAuth auth = FirebaseAuth.instance;
+
+  void _createUser() async{
+    setState(() {
+      disable=true;
+    });
+    if(email.text==""||pass.text==""){
+      setState(() {
+        if(email.text=="")emailError="This field is required";
+        if(pass.text=="")passError="This field is required";
+      });
+    }
+    else{
+      try {
+      await auth.createUserWithEmailAndPassword(
+          email: email.text,
+          password: pass.text
+      );
+    } catch(error){
+      if(error is PlatformException){
+        setState(() {
+          switch (error.code){
+            case "ERROR_INVALID_EMAIL":
+              emailError="The email is invalid";
+              break;
+            case "ERROR_EMAIL_ALREADY_IN_USE":
+              emailError="The email is already in use";
+              break;
+          }
+        });
+      }
+    }
+  }
+    setState(() {
+      disable=false;
+    });
+  }
 
   late AnimationController _controller;
 
@@ -55,25 +92,30 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                   constraints: const BoxConstraints(maxWidth: 300),
                   child: Column(
                     children: [
-                      TextFormField(
+                      TextField(
+                        enabled: !disable,
                         controller: email,
-                        decoration: const InputDecoration(
-                          icon: Icon(Icons.email_outlined),
-                          border: UnderlineInputBorder(),
+                        decoration: InputDecoration(
+                          icon: const Icon(Icons.email_outlined),
+                          border: const UnderlineInputBorder(),
                           labelText: "Email",
+                          errorText: (emailError!=""?emailError:null),
                         ),
                       ),
-                      TextFormField(
+                      TextField(
+                        enabled: !disable,
+                        obscureText: true,
                         controller: pass,
-                        decoration: const InputDecoration(
-                          icon: Icon(Icons.lock),
-                          border: UnderlineInputBorder(),
+                        decoration: InputDecoration(
+                          icon: const Icon(Icons.lock),
+                          border: const UnderlineInputBorder(),
                           labelText: "Password",
+                          errorText: (passError!=""?passError:null),
                         ),
                       ),
-                      const TextButton(
-                        onPressed: _createUser,
-                        child: Text("Inregistreaza-te"),
+                      TextButton(
+                        onPressed: disable?null:_createUser,
+                        child: Text(disable?"Hold on":"Sign Up"),
                       ),
                     ],
                   ),
