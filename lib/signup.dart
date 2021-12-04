@@ -1,16 +1,13 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:clean_our_cities/scaffold_main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
-
-void main(){
-  runApp(const SignUp());
-}
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -91,6 +88,10 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
             "phoneNumber" : phone.text,
           }
         );
+        Navigator.push(
+            context, 
+            MaterialPageRoute(builder: (context)=>ScaffoldMain())
+        );
     } catch(error){
       if(error is PlatformException){
         setState(() {
@@ -128,12 +129,12 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: "Clean our city",
+        title: "Sign Up",
         theme: ThemeData.dark(),
         darkTheme: ThemeData.dark(),
         home: Scaffold(
           appBar: AppBar(
-            title: const Text("Clean our city"),
+            title: const Text("Sign Up"),
           ),
           body: Center(
             child: Container(
@@ -211,7 +212,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                           labelText: "Phone number(optional)",
                         ),
                       ),
-                      TextButton(
+                      ElevatedButton(
                         onPressed: disable?null:_createUser,
                         child: Text(disable?"Hold on":"Sign Up"),
                       ),
