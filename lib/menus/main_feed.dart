@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:clean_our_cities/post/postare.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class MainFeed extends StatefulWidget {
   const MainFeed({Key? key}) : super(key: key);
@@ -11,6 +13,10 @@ class MainFeed extends StatefulWidget {
 class _MainFeedState extends State<MainFeed> {
   @override
   Widget build(BuildContext context) {
+
+    var posts;
+    Firestore.instance.collection("Posts").getDocuments().then((value) => posts=value.documents);
+
     return CustomScrollView(
 
       slivers: [
