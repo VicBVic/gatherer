@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'dart:developer';
 
 void main(){
   runApp(LogIn());
@@ -39,15 +40,17 @@ class _LogInState extends State<LogIn> with SingleTickerProviderStateMixin {
 
     String tmp="This field is required";
 
-    if(email.text==""){emailError=tmp;valid=false;}
-    else {emailError="";}
-    if(pass.text==""){passError=tmp;valid=false;}
-    else {passError="";}
+    setState(() {
+      if(email.text==""){emailError=tmp;valid=false;}
+      else {emailError="";}
+      if(pass.text==""){passError=tmp;valid=false;}
+      else {passError="";}
+    });
 
     if(valid){
 
       try{
-          auth.signInWithEmailAndPassword(email: email.text, password: pass.text);
+          await auth.signInWithEmailAndPassword(email: email.text, password: pass.text);
       } catch(error){
          if(error is PlatformException){
            setState(() {
