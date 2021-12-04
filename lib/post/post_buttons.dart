@@ -12,6 +12,7 @@ class PostButtons extends StatelessWidget {
     return Container(
       color:Theme.of(context).colorScheme.background,
       child: Row(
+        mainAxisSize: MainAxisSize.max,
         children: [
           LikeButton(),
           CommentsButton(),

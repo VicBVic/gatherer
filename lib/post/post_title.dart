@@ -8,7 +8,8 @@ class PostTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Theme.of(context).colorScheme.primary,
-      child: Center(
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10.0),
         child: Text(
           postTitle,
           style: Theme.of(context).textTheme.headline4,

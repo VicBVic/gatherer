@@ -4,7 +4,18 @@ import 'package:clean_our_cities/post/postare.dart';
 import 'package:clean_our_cities/menus/creeaza_postare.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:math';
+
 import 'dart:developer' as developer;
+
+FirebaseAuth mAuth = FirebaseAuth.instance;
 
 class PostareTemp{
   String title = "";
@@ -13,6 +24,7 @@ class PostareTemp{
 }
 
 PostareTemp post = PostareTemp();
+String postLink= "";
 
 void main(){
   runApp(const MyApp());
@@ -38,16 +50,16 @@ class CreearePostare extends StatefulWidget {
 class _CreearePostareState extends State<CreearePostare> {
   @override
   Widget build(BuildContext context) {
-    final titluAplicatie = "Create Post";
     return MaterialApp(
       darkTheme: ThemeData.dark(),
       theme: ThemeData.dark(),
-      title: titluAplicatie,
+      title: "Make Post",
       home: Scaffold(
         appBar: AppBar(
-          title: Text(titluAplicatie),
+          title: Text("Make Post"),
         ),
         body: FormDeCreeare(),
+        resizeToAvoidBottomInset: false,
       ),
     );
   }
@@ -59,29 +71,45 @@ class FormDeCreeare extends StatefulWidget {
   @override
   _FormDeCreeareState createState() => _FormDeCreeareState();
 }
-
 class _FormDeCreeareState extends State<FormDeCreeare> {
   final _formKey = GlobalKey<FormState>();
   File? _image = null;
   final imagePicker = ImagePicker();
 
   Future getImage() async{
-    final image = await imagePicker.getImage(source: ImageSource.camera);
+    final image = await imagePicker.pickImage(source: ImageSource.gallery);
     setState(() {
       _image = File(image!.path);
     });
+  }
+
+  Future uploadImageToFirebase(BuildContext context, String document) async {
+    String fileName = _image!.path;
+    StorageReference firebaseStorageRef =
+    FirebaseStorage.instance.ref().child('uploads/$fileName');
+    StorageUploadTask uploadTask = firebaseStorageRef.putFile(_image);
+    StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
+    taskSnapshot.ref.getDownloadURL().then(
+          (value) => {Firestore.instance.collection("Posts").document(document).updateData({"path":value}), print(value)},
+    );
+  }
+
+  String getUnusedName(String start){
+      Random r = new Random();
+      int val=r.nextInt(99999999);
+      return start+"$val";
   }
 
   @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: ListView(
+        //crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           TextFormField(
             decoration: const InputDecoration(
-              icon: const Icon(Icons.person),
+              icon: Icon(Icons.person),
               hintText: 'Enter post title',
               labelText: 'Title'
             ),
@@ -95,7 +123,7 @@ class _FormDeCreeareState extends State<FormDeCreeare> {
           ),
           TextFormField(
             decoration: const InputDecoration(
-              icon: const Icon(Icons.place),
+              icon: Icon(Icons.place),
               hintText: 'Enter description of event',
               labelText: 'Description',
             ),
@@ -108,18 +136,18 @@ class _FormDeCreeareState extends State<FormDeCreeare> {
             },
 
           ),
-          new Container(
+          Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.only(top: 20.0),
-            child: new ElevatedButton(
+            child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                fixedSize: Size(200, 50),
+                fixedSize: const Size(200, 50),
               ),
               child: const Icon(Icons.camera_alt),
               onPressed: getImage,
             ),
           ),
-          new Container(
+          Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.only(top: 10.0),
             width: 300,
@@ -127,17 +155,24 @@ class _FormDeCreeareState extends State<FormDeCreeare> {
             child:
               _image == null ? Text('No Image Selected') : Image.file(_image!),
           ),
-          new Container(
+          Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.only(top: 10.0),
-            child: new FloatingActionButton(
+            child: FloatingActionButton(
               child: const Text('Submit'),
               onPressed: (){
                 if (_formKey.currentState!.validate() && _image != null){
-                  Scaffold.of(context).showSnackBar(SnackBar(content: Text('Data is processing.')));
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(duration:Duration(seconds: 3), content: Text('Post Saved!')));
                   post.image = _image;
-                  developer.log(post.title);
-                  developer.log(post.description);
+                  String token=getUnusedName(post.title);
+                  print("here"+token);
+                  Firestore.instance.collection("Posts").document(token).setData(
+                    {
+                      "title":post.title,
+                      "description":post.description,
+                    },
+                  );
+                  uploadImageToFirebase(context,token);
                 }
               },
             ),
