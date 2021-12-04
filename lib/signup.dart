@@ -1,3 +1,4 @@
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,9 +19,16 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
 
   final email=TextEditingController();
   final pass=TextEditingController();
+  final user=TextEditingController();
+  final fname=TextEditingController();
+  final lname=TextEditingController();
+  final phone=TextEditingController();
 
   String emailError = "";
   String passError = "";
+  String userError = "";
+  String fnameError = "";
+  String lnameError = "";
 
   bool disable=false;
 
@@ -30,13 +38,25 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
     setState(() {
       disable=true;
     });
-    if(email.text==""||pass.text==""){
+    bool valid=true;
       setState(() {
-        if(email.text=="")emailError="This field is required";
-        if(pass.text=="")passError="This field is required";
+
+        String tmp="This field is required";
+
+        if(email.text==""){emailError=tmp;valid=false;}
+        else {emailError="";}
+        if(pass.text==""){passError=tmp;valid=false;}
+        else {passError="";}
+        if(user.text==""){userError=tmp;valid=false;}
+        else {userError="";}
+        if(fname.text==""){fnameError=tmp;valid=false;}
+        else {fnameError="";}
+        if(lname.text==""){lnameError=tmp;valid=false;}
+        else {lnameError="";}
+
       });
-    }
-    else{
+
+    if(valid){
       try {
       await auth.createUserWithEmailAndPassword(
           email: email.text,
@@ -113,6 +133,53 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                           errorText: (passError!=""?passError:null),
                         ),
                       ),
+                      TextField(
+                        enabled: !disable,
+                        controller: user,
+                        decoration: InputDecoration(
+                          icon: const Icon(Icons.person),
+                          border: const UnderlineInputBorder(),
+                          labelText: "Username",
+                          errorText: (userError!=""?userError:null),
+                        ),
+                      ),
+                      TextField(
+                        enabled: !disable,
+                        controller: fname,
+                        decoration: InputDecoration(
+                          icon: const Icon(Icons.contact_page_rounded),
+                          border: const UnderlineInputBorder(),
+                          labelText: "First name",
+                          errorText: (fnameError!=""?fnameError:null),
+                        ),
+                      ),
+                      TextField(
+                        enabled: !disable,
+                        controller: lname,
+                        decoration: InputDecoration(
+                          icon: const Icon(Icons.contact_page_rounded),
+                          border: const UnderlineInputBorder(),
+                          labelText: "Last name",
+                          errorText: (lnameError!=""?lnameError:null),
+                        ),
+                      ),
+                      //Row(
+                        //children: [
+                          CountryCodePicker(
+                            initialSelection: 'RO',
+                            favorite: ['+40','RO'],
+                          ),
+                          TextField(
+                            enabled: !disable,
+                            controller: phone,
+                            decoration: const InputDecoration(
+                              icon: Icon(Icons.contact_page_rounded),
+                              border: UnderlineInputBorder(),
+                              labelText: "Phone",
+                            ),
+                          ),
+                        //],
+                      //),
                       TextButton(
                         onPressed: disable?null:_createUser,
                         child: Text(disable?"Hold on":"Sign Up"),
