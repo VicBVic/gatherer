@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:clean_our_cities/scaffold_main.dart';
 import 'package:clean_our_cities/post/postare.dart';
 import 'package:clean_our_cities/themes/themes.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() {
   runApp(const MyApp());
