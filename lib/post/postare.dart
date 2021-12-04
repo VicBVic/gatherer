@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:clean_our_cities/post/post_image.dart';
 import 'package:clean_our_cities/post/post_buttons.dart';
 import 'package:clean_our_cities/post/post_title.dart';
+import 'package:clean_our_cities/post/post_user.dart';
 
 class Postare extends StatefulWidget {
   String postTitle="";
@@ -22,6 +23,7 @@ class _PostareState extends State<Postare> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          PostUser(),
           PostTitle(widget.postTitle),
           PostImage(),
           PostButtons(),
