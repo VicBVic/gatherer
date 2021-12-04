@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:clean_our_cities/scaffold_main.dart';
 import 'package:clean_our_cities/postare.dart';
 import 'package:clean_our_cities/themes/themes.dart';
+import 'package:clean_our_cities/postare.dart';
 
 void main() {
   runApp(const MyApp());
