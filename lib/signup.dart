@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -44,6 +45,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
       disable=true;
     });
     bool valid=true;
+
       setState(() {
 
         String tmp="This field is required";
@@ -60,7 +62,17 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
         else {lnameError="";}
         if(age.text == ""){ageError=tmp;valid=false;}
         else {ageError="";}
+
       });
+
+    await Firestore.instance.collection("users").where("user",isEqualTo: user.text).getDocuments().then((value) {
+      for(var doc in value.documents){
+        setState(() {
+          userError="The username is already taken";
+          valid=false;
+        });
+      }
+    });
 
     if(valid){
       try {
@@ -74,7 +86,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
             "email" : email.text,
             "user": user.text,
             "firstName" : fname.text,
-            "fastName" : lname.text,
+            "lastName" : lname.text,
             "age" : age.text,
             "phoneNumber" : phone.text,
           }
