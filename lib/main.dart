@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:clean_our_cities/postare.dart';
+import 'package:clean_our_cities/scaffold_main.dart';
+import 'package:clean_our_cities/themes/themes.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -12,9 +14,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData.dark(),
-      darkTheme: ThemeData.dark(),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      theme: ThemeData.from(
+        colorScheme:getMainColorScheme(),
+        textTheme: ThemeData.dark().textTheme,
+      ),
+      darkTheme: ThemeData(),
+      home: ScaffoldMain(),
     );
   }
 }
