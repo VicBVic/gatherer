@@ -15,7 +15,7 @@ class Postare extends StatefulWidget {
 }
 
 class _PostareState extends State<Postare> {
-  @override
+  @overridegit
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height/1.5,
