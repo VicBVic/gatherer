@@ -1,4 +1,4 @@
-import 'package:clean_our_cities/menus/comment_feed.dart';
+import 'package:clean_our_cities/menus/post_menu.dart';
 import 'package:flutter/material.dart';
 
 class CommentsButton extends StatefulWidget {
@@ -17,7 +17,7 @@ class _CommentsButtonState extends State<CommentsButton> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const CommentFeed())
+            MaterialPageRoute(builder: (context) => const PostMenu())
           );
         },
         child: const Icon(

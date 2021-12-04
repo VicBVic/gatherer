@@ -8,6 +8,8 @@ class Comentariu extends StatefulWidget {
   String commentAuthor='';
   int likeCount=0;
   int dislikeCount=0;
+  bool hasLiked = false;
+  bool hasDisliked = false;
   Comentariu({int likes=0, disklikes=0,String author ='', String comment = '',Key? key}) : super(key: key){
     commentContent=comment;
     commentAuthor=author;
@@ -20,6 +22,33 @@ class Comentariu extends StatefulWidget {
 }
 
 class _ComentariuState extends State<Comentariu> {
+
+  void dislike() {
+    setState(() {
+      if (widget.hasDisliked){
+        widget.hasDisliked = false;
+        widget.dislikeCount --;
+        return;
+      }
+      widget.hasDisliked = true;
+      if (widget.hasLiked) widget.likeCount --;
+      widget.hasLiked = false;
+      widget.dislikeCount ++;
+    });
+  }
+  void like(){
+    setState(() {
+      if (widget.hasLiked){
+        widget.hasLiked = false;
+        widget.likeCount --;
+        return;
+      }
+      widget.hasLiked = true;
+      if (widget.hasDisliked) widget.dislikeCount --;
+      widget.hasDisliked = false;
+      widget.likeCount ++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,16 +81,21 @@ class _ComentariuState extends State<Comentariu> {
               Row(
                 children: [
                   IconButton(
-                    onPressed: () {},
+                    color: (widget.hasLiked) ? Colors.blueAccent : Colors.white,
+                    onPressed: () => {
+                      like()
+                    },
                     icon: const Icon(Icons.thumb_up),
                   ),
                   Text(widget.likeCount.toString()),
-                  IconButton(
-                    onPressed: () {},
+                  IconButton( // Dislike button
+                    color: (widget.hasDisliked) ? Colors.redAccent : Colors.white,
+                    onPressed: () => {
+                      dislike()
+                    },
                     icon: const Icon(Icons.thumb_down),
                   ),
                   Text(widget.dislikeCount.toString()),
-                  TextButton(onPressed: () {}, child: Text('REPLY')),
                 ],
               ),
 
