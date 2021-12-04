@@ -1,5 +1,5 @@
 import 'dart:io';
-
+//import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,8 +27,6 @@ class _LogInState extends State<LogIn> with SingleTickerProviderStateMixin {
   String emailError="";
   String passError="";
 
-  FirebaseAuth auth = FirebaseAuth.instance;
-
   bool disable=false;
 
   void _LogIn() async{
@@ -36,7 +34,6 @@ class _LogInState extends State<LogIn> with SingleTickerProviderStateMixin {
     setState(() {
       disable=true;
     });
-
     bool valid=true;
 
     String tmp="This field is required";
@@ -51,12 +48,16 @@ class _LogInState extends State<LogIn> with SingleTickerProviderStateMixin {
     if(valid){
 
       try{
-          await auth.signInWithEmailAndPassword(email: email.text, password: pass.text);
-          Navigator.push(
+          await FirebaseAuth.instance.signInWithEmailAndPassword(email: email.text, password: pass.text);
+
+          Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context)=>ScaffoldMain())
+              MaterialPageRoute(builder: (context)=>ScaffoldMain()),
+              (route) => false,
           );
+
       } catch(error){
+        log(error.toString());
          if(error is PlatformException){
            setState(() {
              switch(error.code){
@@ -70,6 +71,7 @@ class _LogInState extends State<LogIn> with SingleTickerProviderStateMixin {
                  emailError="The email doesn't exist";
                  break;
              }
+
            });
          }
       }

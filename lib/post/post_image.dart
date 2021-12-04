@@ -2,7 +2,8 @@ import 'package:clean_our_cities/menus/post_menu.dart';
 import 'package:flutter/material.dart';
 
 class PostImage extends StatelessWidget {
-  const PostImage({Key? key}) : super(key: key);
+  String link="";
+  PostImage({required this.link,Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
