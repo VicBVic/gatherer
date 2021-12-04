@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:clean_our_cities/scaffold_main.dart';
-import 'package:clean_our_cities/postare.dart';
+import 'package:clean_our_cities/post/postare.dart';
 import 'package:clean_our_cities/themes/themes.dart';
 
 void main() {

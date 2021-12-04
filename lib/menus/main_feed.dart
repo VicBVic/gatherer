@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:clean_our_cities/postare.dart';
+import 'package:clean_our_cities/post/postare.dart';
 
 class MainFeed extends StatefulWidget {
   const MainFeed({Key? key}) : super(key: key);

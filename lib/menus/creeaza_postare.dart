@@ -1,6 +1,6 @@
 import 'package:clean_our_cities/main.dart';
 import 'package:flutter/material.dart';
-import 'package:clean_our_cities/postare.dart';
+import 'package:clean_our_cities/post/postare.dart';
 import 'package:clean_our_cities/menus/creeaza_postare.dart';
 
 void main(){
