@@ -19,7 +19,7 @@ class _MainFeedState extends State<MainFeed> {
           pinned: false,
           stretch: true,
           flexibleSpace: FlexibleSpaceBar(
-            title: Text("BRUH"),
+            title: Text("Main Feed"),
             background: Container(
               height: 250.0,
               color: Theme.of(context).colorScheme.secondaryVariant,
@@ -29,7 +29,7 @@ class _MainFeedState extends State<MainFeed> {
         SliverList(
           delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index){
-                return Postare(title:"Trol $index");
+                return Postare(title:"Post $index");
               }),
         ),
       ],

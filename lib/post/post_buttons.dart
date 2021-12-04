@@ -10,7 +10,7 @@ class PostButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color:Theme.of(context).colorScheme.secondary,
+      color:Theme.of(context).colorScheme.background,
       child: Row(
         children: [
           LikeButton(),
