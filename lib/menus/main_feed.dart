@@ -11,11 +11,12 @@ class MainFeed extends StatefulWidget {
 }
 
 class _MainFeedState extends State<MainFeed> {
+  List<DocumentSnapshot> posts=[];
   @override
   Widget build(BuildContext context) {
 
-    var posts;
-    Firestore.instance.collection("Posts").getDocuments().then((value) => posts=value.documents);
+
+    if(posts.isEmpty){Firestore.instance.collection("Posts").getDocuments().then((value) => setState((){posts=value.documents;})); return Center(child:Text("hold on..."));}
 
     return CustomScrollView(
 
@@ -34,7 +35,7 @@ class _MainFeedState extends State<MainFeed> {
         SliverList(
           delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index){
-                return Postare(title:"Post $index");
+                return Postare(postId:posts[index]);
               }),
         ),
       ],
