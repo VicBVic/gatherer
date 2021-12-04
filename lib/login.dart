@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:clean_our_cities/scaffold_main.dart';
 import 'dart:developer';
 
 void main(){
@@ -51,6 +52,10 @@ class _LogInState extends State<LogIn> with SingleTickerProviderStateMixin {
 
       try{
           await auth.signInWithEmailAndPassword(email: email.text, password: pass.text);
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context)=>ScaffoldMain())
+          );
       } catch(error){
          if(error is PlatformException){
            setState(() {
@@ -91,12 +96,12 @@ class _LogInState extends State<LogIn> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: "Clean our city",
+        title: "Log In",
         theme: ThemeData.dark(),
         darkTheme: ThemeData.dark(),
         home: Scaffold(
           appBar: AppBar(
-            title: const Text("Clean our city"),
+            title: const Text("Log In"),
           ),
           body: Center(
             child: Container(
@@ -125,7 +130,7 @@ class _LogInState extends State<LogIn> with SingleTickerProviderStateMixin {
                         errorText: (passError!=""?passError:null),
                       ),
                     ),
-                    TextButton(
+                    ElevatedButton(
                       onPressed: disable?null:_LogIn,
                       child: Text(disable?"Hold on":"Log in"),
                     ),
