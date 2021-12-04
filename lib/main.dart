@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:clean_our_cities/postare.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 void main() {
   runApp(const MyApp());
 }

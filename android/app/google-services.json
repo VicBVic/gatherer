@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "212813830827",
+    "project_id": "clean-ee104",
+    "storage_bucket": "clean-ee104.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:212813830827:android:620d882e135ac86b7175ee",
+        "android_client_info": {
+          "package_name": "com.example.clean_our_cities"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "212813830827-cgh5q30dltvi9ur8e5jhvun6p27nu9id.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnkP7loT3yEHxctDAi8IaUqjiDBZXf2UE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "212813830827-cgh5q30dltvi9ur8e5jhvun6p27nu9id.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
