@@ -28,6 +28,8 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+List <Postare> listaCuPostari = [Postare(),Postare(), Postare()];
+
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
@@ -37,8 +39,40 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _adaugaPostare()
+  {
+    listaCuPostari.add(Postare());
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Postare();
+    return Scaffold(
+        body: Container(
+          alignment: Alignment.center,
+          child: CustomScrollView(
+            slivers: [
+              const SliverAppBar(
+                centerTitle: true,
+                backgroundColor: Colors.amber,
+                title: Text('Postari'),
+                expandedHeight: 30,
+                collapsedHeight: 150,
+              ),
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
+                    return listaCuPostari[index];
+                  },
+                  childCount: listaCuPostari.length, // 1000 list items
+                ),
+              ),
+            ],
+          ),
+        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => setState(_adaugaPostare),
+      ),
+
+    );
   }
 }
