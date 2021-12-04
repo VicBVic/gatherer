@@ -1,3 +1,4 @@
+import 'package:clean_our_cities/menus/comment_feed.dart';
 import 'package:flutter/material.dart';
 
 class CommentsButton extends StatefulWidget {
@@ -13,7 +14,12 @@ class _CommentsButtonState extends State<CommentsButton> {
     return Flexible(
       fit:FlexFit.tight,
       child: ElevatedButton(
-        onPressed: (){},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const CommentFeed())
+          );
+        },
         child: const Icon(
           Icons.comment,
         ),
