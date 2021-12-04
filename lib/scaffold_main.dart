@@ -13,7 +13,7 @@ class ScaffoldMain extends StatefulWidget {
 
 class _ScaffoldMainState extends State<ScaffoldMain> {
 
-  var menus=[MainFeed(),MainFeed(),CreearePostare()];
+  var menus=[MainFeed(),CreearePostare()];
 
   int currentIndex=0;
   int getIndex(){
