@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:clean_our_cities/scaffold_main.dart';
 import 'package:clean_our_cities/postare.dart';
 import 'package:clean_our_cities/themes/themes.dart';
 
@@ -19,16 +20,7 @@ class MyApp extends StatelessWidget {
         textTheme: ThemeData.dark().textTheme,
       ),
       darkTheme: ThemeData(),
-      home: CustomScrollView(
-        slivers: [
-          SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index){
-              return Postare(title:"Trol $index");
-            }),
-          ),
-        ],
-      ),
+      home: ScaffoldMain(),
     );
   }
 }
