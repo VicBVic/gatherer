@@ -38,16 +38,16 @@ class CreearePostare extends StatefulWidget {
 class _CreearePostareState extends State<CreearePostare> {
   @override
   Widget build(BuildContext context) {
-    final titluAplicatie = "Create Post";
     return MaterialApp(
       darkTheme: ThemeData.dark(),
       theme: ThemeData.dark(),
-      title: titluAplicatie,
+      title: "Make Post",
       home: Scaffold(
         appBar: AppBar(
-          title: Text(titluAplicatie),
+          title: Text("Make Post"),
         ),
         body: FormDeCreeare(),
+        resizeToAvoidBottomInset: false,
       ),
     );
   }
@@ -66,7 +66,7 @@ class _FormDeCreeareState extends State<FormDeCreeare> {
   final imagePicker = ImagePicker();
 
   Future getImage() async{
-    final image = await imagePicker.getImage(source: ImageSource.camera);
+    final image = await imagePicker.pickImage(source: ImageSource.gallery);
     setState(() {
       _image = File(image!.path);
     });
@@ -76,8 +76,8 @@ class _FormDeCreeareState extends State<FormDeCreeare> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: ListView(
+        //crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           TextFormField(
             decoration: const InputDecoration(
@@ -95,7 +95,7 @@ class _FormDeCreeareState extends State<FormDeCreeare> {
           ),
           TextFormField(
             decoration: const InputDecoration(
-              icon: const Icon(Icons.place),
+              icon: Icon(Icons.place),
               hintText: 'Enter description of event',
               labelText: 'Description',
             ),
@@ -108,10 +108,10 @@ class _FormDeCreeareState extends State<FormDeCreeare> {
             },
 
           ),
-          new Container(
+          Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.only(top: 20.0),
-            child: new ElevatedButton(
+            child:  ElevatedButton(
               style: ElevatedButton.styleFrom(
                 fixedSize: Size(200, 50),
               ),
@@ -119,7 +119,7 @@ class _FormDeCreeareState extends State<FormDeCreeare> {
               onPressed: getImage,
             ),
           ),
-          new Container(
+          Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.only(top: 10.0),
             width: 300,
@@ -127,17 +127,16 @@ class _FormDeCreeareState extends State<FormDeCreeare> {
             child:
               _image == null ? Text('No Image Selected') : Image.file(_image!),
           ),
-          new Container(
+          Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.only(top: 10.0),
-            child: new FloatingActionButton(
+            child: FloatingActionButton(
               child: const Text('Submit'),
               onPressed: (){
                 if (_formKey.currentState!.validate() && _image != null){
-                  Scaffold.of(context).showSnackBar(SnackBar(content: Text('Data is processing.')));
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(duration:Duration(seconds: 3), content: Text('Post Saved!')));
                   post.image = _image;
-                  developer.log(post.title);
-                  developer.log(post.description);
+
                 }
               },
             ),
