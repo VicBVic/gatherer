@@ -60,6 +60,8 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
         else {lnameError="";}
         if(age.text == ""){ageError=tmp;valid=false;}
         else {ageError="";}
+
+        Firestore.instance.collection("users").where("user",isEqualTo: "${user.text}")
       });
 
     if(valid){
@@ -74,7 +76,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
             "email" : email.text,
             "user": user.text,
             "firstName" : fname.text,
-            "fastName" : lname.text,
+            "lastName" : lname.text,
             "age" : age.text,
             "phoneNumber" : phone.text,
           }
