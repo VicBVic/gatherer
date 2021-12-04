@@ -81,7 +81,7 @@ class _FormDeCreeareState extends State<FormDeCreeare> {
         children: <Widget>[
           TextFormField(
             decoration: const InputDecoration(
-              icon: const Icon(Icons.person),
+              icon: Icon(Icons.person),
               hintText: 'Enter post title',
               labelText: 'Title'
             ),
@@ -95,7 +95,7 @@ class _FormDeCreeareState extends State<FormDeCreeare> {
           ),
           TextFormField(
             decoration: const InputDecoration(
-              icon: const Icon(Icons.place),
+              icon: Icon(Icons.place),
               hintText: 'Enter description of event',
               labelText: 'Description',
             ),
@@ -108,18 +108,18 @@ class _FormDeCreeareState extends State<FormDeCreeare> {
             },
 
           ),
-          new Container(
+          Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.only(top: 20.0),
-            child: new ElevatedButton(
+            child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                fixedSize: Size(200, 50),
+                fixedSize: const Size(200, 50),
               ),
               child: const Icon(Icons.camera_alt),
               onPressed: getImage,
             ),
           ),
-          new Container(
+          Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.only(top: 10.0),
             width: 300,
@@ -127,10 +127,10 @@ class _FormDeCreeareState extends State<FormDeCreeare> {
             child:
               _image == null ? Text('No Image Selected') : Image.file(_image!),
           ),
-          new Container(
+          Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.only(top: 10.0),
-            child: new FloatingActionButton(
+            child: FloatingActionButton(
               child: const Text('Submit'),
               onPressed: (){
                 if (_formKey.currentState!.validate() && _image != null){
