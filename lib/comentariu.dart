@@ -60,7 +60,7 @@ class _ComentariuState extends State<Comentariu> {
                     icon: const Icon(Icons.thumb_down),
                   ),
                   Text(widget.dislikeCount.toString()),
-                  FlatButton(onPressed: () {}, child: Text('REPLY')),
+                  TextButton(onPressed: () {}, child: Text('REPLY')),
                 ],
               ),
 
