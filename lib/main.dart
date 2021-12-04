@@ -1,16 +1,20 @@
+import 'dart:developer';
+
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:clean_our_cities/scaffold_main.dart';
 import 'package:clean_our_cities/post/postare.dart';
 import 'package:clean_our_cities/themes/themes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:clean_our_cities/menu.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override

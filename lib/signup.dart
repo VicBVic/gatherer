@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
-
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:clean_our_cities/scaffold_main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -88,9 +88,10 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
             "phoneNumber" : phone.text,
           }
         );
-        Navigator.push(
+        Navigator.pushAndRemoveUntil(
             context, 
-            MaterialPageRoute(builder: (context)=>ScaffoldMain())
+            MaterialPageRoute(builder: (context)=>ScaffoldMain()),
+            (route) => false,
         );
     } catch(error){
       if(error is PlatformException){
