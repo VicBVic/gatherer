@@ -1,5 +1,6 @@
 import 'package:clean_our_cities/comentariu.dart';
 import 'package:clean_our_cities/like_button.dart';
+import 'package:clean_our_cities/post/post_user.dart';
 import 'package:clean_our_cities/share_button.dart';
 import 'package:flutter/material.dart';
 import 'package:clean_our_cities/post/postare.dart';
@@ -9,7 +10,8 @@ var comentarii = [Comentariu(author: 'aibr', comment: 'acn',),
   Comentariu(author: 'aibr', comment: 'acn',)];
 
 class PostMenu extends StatefulWidget {
-  const PostMenu({Key? key}) : super(key: key);
+  String link;
+  PostMenu(this.link,{Key? key}) : super(key: key);
 
 
   @override
@@ -41,14 +43,9 @@ class _PostMenuState extends State<PostMenu> {
                           color: Colors.grey[800],
                           child: Column(
                             children: [
-                              Text(
-                                'titul',
-                                style: TextStyle(
-                                  fontSize: 18
-                                ),
-                              ),
+                              PostUser(),
                               Image(image: NetworkImage(
-                                'https://lp-cms-production.imgix.net/image_browser/GettyImages-1096103184.jpg?auto=format&fit=crop&sharp=10&vib=20&ixlib=react-8.6.4&w=850',
+                                widget.link
                               )),
                               Row(
                                 children: [
