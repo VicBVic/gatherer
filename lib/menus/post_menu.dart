@@ -2,17 +2,15 @@ import 'package:clean_our_cities/comentariu.dart';
 import 'package:clean_our_cities/like_button.dart';
 import 'package:clean_our_cities/post/post_user.dart';
 import 'package:clean_our_cities/share_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:clean_our_cities/post/postare.dart';
-import 'package:clean_our_cities/post/post_buttons.dart';
 
-var comentarii = [Comentariu(author: 'aibr', comment: 'acn',),
-  Comentariu(author: 'aibr', comment: 'acn',)];
 
 class PostMenu extends StatefulWidget {
-  String link;
-  PostMenu(this.link,{Key? key}) : super(key: key);
-
+  DocumentSnapshot postId;
+  var comentarii;
+  PostMenu(DocumentSnapshot this.postId,var this.comentarii,{Key? key}) : super(key: key);
 
   @override
   _PostMenuState createState() => _PostMenuState();
@@ -45,7 +43,7 @@ class _PostMenuState extends State<PostMenu> {
                             children: [
                               PostUser(),
                               Image(image: NetworkImage(
-                                widget.link
+                                widget.postId.data["path"],
                               )),
                               Row(
                                 children: [
@@ -58,16 +56,16 @@ class _PostMenuState extends State<PostMenu> {
                         );
                       else if (index == 1)
                         return Text(
-                            'this is the post\n description.',
+                            widget.postId.data["description"],
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 16,
                             ),
                         );
-                      else return comentarii[index-2];
+                      else return widget.comentarii[index-2];
                       //else return Comentariu(comment:'comentarr $index',author: "auth",);
                 },
-                childCount: comentarii.length+2,
+                childCount: widget.comentarii.length+2,
                 ),
 
           ),
