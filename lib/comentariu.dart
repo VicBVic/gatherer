@@ -25,6 +25,7 @@ class _ComentariuState extends State<Comentariu> {
   Widget build(BuildContext context) {
     return Container(
       color: Theme.of(context).colorScheme.background,
+      margin: EdgeInsets.all(8),
       child:Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
