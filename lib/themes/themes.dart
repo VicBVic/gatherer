@@ -5,7 +5,7 @@ ColorScheme getMainColorScheme(){
   return ColorScheme(
       primary: Colors.grey.shade900,
       primaryVariant: Colors.grey.shade800,
-      secondary: Color.alphaBlend(Colors.grey.shade900, Colors.indigo),
+      secondary: Colors.blue.shade900,
       secondaryVariant: Colors.blue.shade800,
       surface: Colors.blue.shade700,
       background: Colors.black,

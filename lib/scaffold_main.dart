@@ -10,6 +10,18 @@ class ScaffoldMain extends StatefulWidget {
 }
 
 class _ScaffoldMainState extends State<ScaffoldMain> {
+
+  int currentIndex=0;
+  int getIndex(){
+    return currentIndex;
+  }
+  void changeIndex(int newInd){
+    setState(() {
+      currentIndex=newInd;
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,6 +49,8 @@ class _ScaffoldMainState extends State<ScaffoldMain> {
         ],
       ),
       bottomNavigationBar: NavigationBarMain(
+        getIndex: getIndex,
+        changeIndex: changeIndex,
       ),
     );
   }

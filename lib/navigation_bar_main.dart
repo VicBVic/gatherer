@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
 class NavigationBarMain extends StatefulWidget {
-  NavigationBarMain({Key? key}) : super(key: key);
+
+  Function getIndexMain=(){};
+  Function(int) changeIndexMain=(int){};
+
+  NavigationBarMain({Key? key, required Function(int) changeIndex,required Function getIndex}) : super(key: key){
+    changeIndexMain=changeIndex;
+    getIndexMain=getIndex;
+  }
 
   @override
   _NavigationBarMainState createState() => _NavigationBarMainState();
 }
 
 class _NavigationBarMainState extends State<NavigationBarMain> {
-
-  int currentIndex=0;
-  void changeIndex(int newIndex){
-    setState((){
-      currentIndex=newIndex;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +32,8 @@ class _NavigationBarMainState extends State<NavigationBarMain> {
           label:"User",
         ),
       ],
-      currentIndex: currentIndex,
-      onTap: changeIndex,
+      currentIndex: widget.getIndexMain(),
+      onTap: widget.changeIndexMain,
     );
 
   }
