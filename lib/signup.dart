@@ -45,6 +45,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
       disable=true;
     });
     bool valid=true;
+
       setState(() {
 
         String tmp="This field is required";
@@ -62,14 +63,16 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
         if(age.text == ""){ageError=tmp;valid=false;}
         else {ageError="";}
 
-        Firestore.instance.collection("users").where("user",isEqualTo: user.text).getDocuments().then((value) {
-          for(var doc in value.documents){
-            userError="The username is already taken";
-            valid=false;
-            return;
-          }
-        });
       });
+
+    await Firestore.instance.collection("users").where("user",isEqualTo: user.text).getDocuments().then((value) {
+      for(var doc in value.documents){
+        setState(() {
+          userError="The username is already taken";
+          valid=false;
+        });
+      }
+    });
 
     if(valid){
       try {
