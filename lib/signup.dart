@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -61,7 +62,13 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
         if(age.text == ""){ageError=tmp;valid=false;}
         else {ageError="";}
 
-        Firestore.instance.collection("users").where("user",isEqualTo: "${user.text}")
+        Firestore.instance.collection("users").where("user",isEqualTo: user.text).getDocuments().then((value) {
+          for(var doc in value.documents){
+            userError="The username is already taken";
+            valid=false;
+            return;
+          }
+        });
       });
 
     if(valid){
