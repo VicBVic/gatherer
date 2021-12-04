@@ -4,7 +4,18 @@ import 'package:clean_our_cities/post/postare.dart';
 import 'package:clean_our_cities/menus/creeaza_postare.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:math';
+
 import 'dart:developer' as developer;
+
+FirebaseAuth mAuth = FirebaseAuth.instance;
 
 class PostareTemp{
   String title = "";
@@ -13,6 +24,7 @@ class PostareTemp{
 }
 
 PostareTemp post = PostareTemp();
+String postLink= "";
 
 void main(){
   runApp(const MyApp());
@@ -59,7 +71,6 @@ class FormDeCreeare extends StatefulWidget {
   @override
   _FormDeCreeareState createState() => _FormDeCreeareState();
 }
-
 class _FormDeCreeareState extends State<FormDeCreeare> {
   final _formKey = GlobalKey<FormState>();
   File? _image = null;
@@ -70,6 +81,23 @@ class _FormDeCreeareState extends State<FormDeCreeare> {
     setState(() {
       _image = File(image!.path);
     });
+  }
+
+  Future uploadImageToFirebase(BuildContext context, String document) async {
+    String fileName = _image!.path;
+    StorageReference firebaseStorageRef =
+    FirebaseStorage.instance.ref().child('uploads/$fileName');
+    StorageUploadTask uploadTask = firebaseStorageRef.putFile(_image);
+    StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
+    taskSnapshot.ref.getDownloadURL().then(
+          (value) => {Firestore.instance.collection("Posts").document(document).updateData({"path":value}), print(value)},
+    );
+  }
+
+  String getUnusedName(String start){
+      Random r = new Random();
+      int val=r.nextInt(99999999);
+      return start+"$val";
   }
 
   @override
@@ -136,7 +164,15 @@ class _FormDeCreeareState extends State<FormDeCreeare> {
                 if (_formKey.currentState!.validate() && _image != null){
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(duration:Duration(seconds: 3), content: Text('Post Saved!')));
                   post.image = _image;
-
+                  String token=getUnusedName(post.title);
+                  print("here"+token);
+                  Firestore.instance.collection("Posts").document(token).setData(
+                    {
+                      "title":post.title,
+                      "description":post.description,
+                    },
+                  );
+                  uploadImageToFirebase(context,token);
                 }
               },
             ),
