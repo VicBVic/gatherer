@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:clean_our_cities/post/postare.dart';
 import 'package:clean_our_cities/menus/creeaza_postare.dart';
 import 'package:clean_our_cities/menus/main_feed.dart';
+import 'package:clean_our_cities/menus/setari_user.dart';
 
 class ScaffoldMain extends StatefulWidget {
   const ScaffoldMain({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class ScaffoldMain extends StatefulWidget {
 
 class _ScaffoldMainState extends State<ScaffoldMain> {
 
-  var menus=[MainFeed(),CreearePostare()];
+  var menus=[MainFeed(),Settings(),CreearePostare()];
 
   int currentIndex=0;
   int getIndex(){

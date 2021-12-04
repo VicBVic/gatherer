@@ -7,17 +7,17 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:developer' as developer;
 
 void main(){
-  runApp(const MyApp());
+  runApp(const Settings());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class Settings extends StatefulWidget {
+  const Settings({Key? key}) : super(key: key);
 
   @override
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<Settings> {
 
   bool enableName = false;
   bool enablePassword = false;
@@ -69,7 +69,12 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  _getText(){
+
+  }
+
   TextEditingController _controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
