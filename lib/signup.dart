@@ -1,8 +1,11 @@
-import 'package:country_code_picker/country_code_picker.dart';
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main(){
   runApp(const SignUp());
@@ -23,12 +26,14 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
   final fname=TextEditingController();
   final lname=TextEditingController();
   final phone=TextEditingController();
+  final age=TextEditingController();
 
   String emailError = "";
   String passError = "";
   String userError = "";
   String fnameError = "";
   String lnameError = "";
+  String ageError = "";
 
   bool disable=false;
 
@@ -53,15 +58,27 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
         else {fnameError="";}
         if(lname.text==""){lnameError=tmp;valid=false;}
         else {lnameError="";}
-
+        if(age.text == ""){ageError=tmp;valid=false;}
+        else {ageError="";}
       });
 
     if(valid){
       try {
-      await auth.createUserWithEmailAndPassword(
+        await auth.createUserWithEmailAndPassword(
           email: email.text,
           password: pass.text
-      );
+        );
+        FirebaseUser use= await auth.currentUser();
+        Firestore.instance.collection("users").document("${use.uid}").setData(
+          {
+            "email" : email.text,
+            "user": user.text,
+            "FirstName" : fname.text,
+            "LastName" : lname.text,
+            "age" : age.text,
+            "phone number" : phone.text,
+          }
+        );
     } catch(error){
       if(error is PlatformException){
         setState(() {
@@ -101,6 +118,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
     return MaterialApp(
         title: "Clean our city",
         theme: ThemeData.dark(),
+        darkTheme: ThemeData.dark(),
         home: Scaffold(
           appBar: AppBar(
             title: const Text("Clean our city"),
@@ -163,23 +181,25 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                           errorText: (lnameError!=""?lnameError:null),
                         ),
                       ),
-                      //Row(
-                        //children: [
-                          CountryCodePicker(
-                            initialSelection: 'RO',
-                            favorite: ['+40','RO'],
-                          ),
-                          TextField(
-                            enabled: !disable,
-                            controller: phone,
-                            decoration: const InputDecoration(
-                              icon: Icon(Icons.contact_page_rounded),
-                              border: UnderlineInputBorder(),
-                              labelText: "Phone",
-                            ),
-                          ),
-                        //],
-                      //),
+                      TextField(
+                        enabled: !disable,
+                        controller: age,
+                        decoration: InputDecoration(
+                          icon: const Icon(Icons.child_care),
+                          border: const UnderlineInputBorder(),
+                          labelText: "Age",
+                          errorText: (ageError!=""?ageError:null),
+                        ),
+                      ),
+                      TextField(
+                        enabled: !disable,
+                        controller: phone,
+                        decoration: const InputDecoration(
+                          icon: Icon(Icons.contact_phone_rounded),
+                          border: UnderlineInputBorder(),
+                          labelText: "Phone number(optional)",
+                        ),
+                      ),
                       TextButton(
                         onPressed: disable?null:_createUser,
                         child: Text(disable?"Hold on":"Sign Up"),
