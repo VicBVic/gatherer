@@ -2,6 +2,17 @@ import 'package:clean_our_cities/main.dart';
 import 'package:flutter/material.dart';
 import 'package:clean_our_cities/post/postare.dart';
 import 'package:clean_our_cities/menus/creeaza_postare.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+import 'dart:developer' as developer;
+
+class PostareTemp{
+  String title = "";
+  String description = "";
+  File? image = null;
+}
+
+PostareTemp post = PostareTemp();
 
 void main(){
   runApp(const MyApp());
@@ -51,6 +62,15 @@ class FormDeCreeare extends StatefulWidget {
 
 class _FormDeCreeareState extends State<FormDeCreeare> {
   final _formKey = GlobalKey<FormState>();
+  File? _image = null;
+  final imagePicker = ImagePicker();
+
+  Future getImage() async{
+    final image = await imagePicker.getImage(source: ImageSource.camera);
+    setState(() {
+      _image = File(image!.path);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,13 +82,14 @@ class _FormDeCreeareState extends State<FormDeCreeare> {
           TextFormField(
             decoration: const InputDecoration(
               icon: const Icon(Icons.person),
-              hintText: 'Enter post name',
-              labelText: 'Name'
+              hintText: 'Enter post title',
+              labelText: 'Title'
             ),
             validator: (value){
               if (value!.isEmpty){
-                return 'Please enter a valid name';
+                return 'Please enter a valid title';
               }
+              post.title = value;
               return null;
             },
           ),
@@ -82,17 +103,41 @@ class _FormDeCreeareState extends State<FormDeCreeare> {
               if (value!.isEmpty){
                 return 'Please enter a valid description';
               }
+              post.description = value;
               return null;
             },
+
           ),
           new Container(
             alignment: Alignment.center,
-            padding: const EdgeInsets.only(left: 150.0, top: 40.0),
+            padding: const EdgeInsets.only(top: 20.0),
+            child: new ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                fixedSize: Size(200, 50),
+              ),
+              child: const Icon(Icons.camera_alt),
+              onPressed: getImage,
+            ),
+          ),
+          new Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.only(top: 10.0),
+            width: 300,
+            height: 200,
+            child:
+              _image == null ? Text('No Image Selected') : Image.file(_image!),
+          ),
+          new Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.only(top: 10.0),
             child: new FloatingActionButton(
               child: const Text('Submit'),
               onPressed: (){
-                if (_formKey.currentState!.validate()){
+                if (_formKey.currentState!.validate() && _image != null){
                   Scaffold.of(context).showSnackBar(SnackBar(content: Text('Data is processing.')));
+                  post.image = _image;
+                  developer.log(post.title);
+                  developer.log(post.description);
                 }
               },
             ),
@@ -102,3 +147,4 @@ class _FormDeCreeareState extends State<FormDeCreeare> {
     );
   }
 }
+
