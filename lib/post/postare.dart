@@ -18,14 +18,23 @@ class _PostareState extends State<Postare> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: MediaQuery.of(context).size.height/1.5,
       color: Theme.of(context).colorScheme.background,
       child:Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          PostUser(),
+          Flexible(
+              fit:FlexFit.tight,
+              flex: 1,
+              child: PostUser(),
+          ),
           PostTitle(widget.postTitle),
-          PostImage(),
+          Flexible(
+              fit:FlexFit.tight,
+              flex: 6,
+              child: PostImage(),
+          ),
           PostButtons(),
         ],
       ),
