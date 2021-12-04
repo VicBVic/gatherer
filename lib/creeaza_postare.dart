@@ -26,7 +26,7 @@ class CreearePostare extends StatefulWidget {
 class _CreearePostareState extends State<CreearePostare> {
   @override
   Widget build(BuildContext context) {
-    final titluAplicatie = "Creeaza postare";
+    final titluAplicatie = "Create Post";
     return MaterialApp(
       darkTheme: ThemeData.dark(),
       theme: ThemeData.dark(),
@@ -56,21 +56,44 @@ class _FormDeCreeareState extends State<FormDeCreeare> {
     return Form(
       key: _formKey,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           TextFormField(
             decoration: const InputDecoration(
               icon: const Icon(Icons.person),
-              hintText: 'Enter your name',
+              hintText: 'Enter post name',
               labelText: 'Name'
             ),
+            validator: (value){
+              if (value!.isEmpty){
+                return 'Please enter a valid name';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              icon: const Icon(Icons.place),
+              hintText: 'Enter description of event',
+              labelText: 'Description',
+            ),
+            validator: (value){
+              if (value!.isEmpty){
+                return 'Please enter a valid description';
+              }
+              return null;
+            },
           ),
           new Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.only(left: 150.0, top: 40.0),
             child: new FloatingActionButton(
               child: const Text('Submit'),
-              onPressed: null,
+              onPressed: (){
+                if (_formKey.currentState!.validate()){
+                  Scaffold.of(context).showSnackBar(SnackBar(content: Text('Data is processing.')));
+                }
+              },
             ),
           ),
         ],
