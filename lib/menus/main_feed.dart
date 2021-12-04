@@ -21,7 +21,6 @@ class _MainFeedState extends State<MainFeed> {
           flexibleSpace: FlexibleSpaceBar(
             title: Text("Main Feed"),
             background: Container(
-              height: 250.0,
               color: Theme.of(context).colorScheme.secondaryVariant,
             ),
           ),
