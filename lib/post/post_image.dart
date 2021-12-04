@@ -14,11 +14,13 @@ class PostImage extends StatelessWidget {
         onPressed: () {
           Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const PostMenu())
+              MaterialPageRoute(builder: (context) =>  PostMenu(
+                link
+              ))
           );
         },
         child: Image(
-          image: NetworkImage('https://lp-cms-production.imgix.net/image_browser/GettyImages-1096103184.jpg?auto=format&fit=crop&sharp=10&vib=20&ixlib=react-8.6.4&w=850'),
+          image: NetworkImage(link),
         ),
       ),
     );

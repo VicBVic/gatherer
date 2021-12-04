@@ -36,7 +36,9 @@ class _MainFeedState extends State<MainFeed> {
           delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index){
                 return Postare(postId:posts[index]);
-              }),
+              },
+              childCount: posts.length,
+          ),
         ),
       ],
     );
