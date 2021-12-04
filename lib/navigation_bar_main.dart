@@ -31,6 +31,11 @@ class _NavigationBarMainState extends State<NavigationBarMain> {
           backgroundColor: Theme.of(context).colorScheme.secondaryVariant,
           label:"User",
         ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.add_box),
+          backgroundColor: Theme.of(context).colorScheme.secondary,
+          label:"Make Post",
+        ),
       ],
       currentIndex: widget.getIndexMain(),
       onTap: widget.changeIndexMain,

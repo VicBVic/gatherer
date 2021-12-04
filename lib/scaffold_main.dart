@@ -1,6 +1,8 @@
 import 'package:clean_our_cities/navigation_bar_main.dart';
 import 'package:flutter/material.dart';
 import 'package:clean_our_cities/postare.dart';
+import 'package:clean_our_cities/menus/creeaza_postare.dart';
+import 'package:clean_our_cities/menus/main_feed.dart';
 
 class ScaffoldMain extends StatefulWidget {
   const ScaffoldMain({Key? key}) : super(key: key);
@@ -10,6 +12,9 @@ class ScaffoldMain extends StatefulWidget {
 }
 
 class _ScaffoldMainState extends State<ScaffoldMain> {
+
+  var menus=[MainFeed(),MainFeed(),CreearePostare()];
+
   int currentIndex=0;
   int getIndex(){
     return currentIndex;
@@ -23,28 +28,9 @@ class _ScaffoldMainState extends State<ScaffoldMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-
-        slivers: [
-          SliverAppBar(
-           floating: true,
-            pinned: false,
-            stretch: true,
-            flexibleSpace: FlexibleSpaceBar(
-              title: Text("BRUH"),
-             background: Container(
-               height: 250.0,
-               color: Theme.of(context).colorScheme.secondaryVariant,
-             ),
-           ),
-          ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index){
-                  return Postare(title:"Trol $index");
-                }),
-          ),
-        ],
+      body: AnimatedSwitcher(
+        duration: Duration(milliseconds: 500),
+        child: menus[currentIndex],
       ),
       bottomNavigationBar: NavigationBarMain(
         getIndex: getIndex,
