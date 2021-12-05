@@ -19,11 +19,14 @@ class PostMenu extends StatefulWidget {
 }
 
 class _PostMenuState extends State<PostMenu> {
-
   void posteazaComentariu(String comentariu) {
-    setState(() {
-      widget.comentarii.add(Comentariu(comment: comentariu,));
-    });
+    print (widget.postId.documentID);
+    Firestore.instance.collection("Posts").document(widget.postId.documentID).updateData(
+        {
+          "comments": FieldValue.arrayUnion([comentariu]),
+        }
+    );
+    print("done bitch");
   }
   final _formKey = GlobalKey<FormState>();
   late FocusNode myFocusNode;
@@ -45,6 +48,7 @@ class _PostMenuState extends State<PostMenu> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.comentarii);
     if (widget.comentarii == null){
       widget.comentarii = [];
     }
@@ -167,9 +171,10 @@ class _PostMenuState extends State<PostMenu> {
                                 ElevatedButton(
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()){
-                                        posteazaComentariu(widget.comentariu);
+                                        setState((){posteazaComentariu(widget.comentariu);});
                                       }
                                     Navigator.of(context).pop();
+
                                     developer.log("${myFocusNode.hasFocus}");
                                     myFocusNode.requestFocus();
                                     myFocusNode.unfocus();

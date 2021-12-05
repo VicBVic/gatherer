@@ -2,10 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:clean_our_cities/post/postare.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:clean_our_cities/menus/post_menu.dart';
+import 'package:clean_our_cities/comentariu.dart';
 class HorizontalList extends StatelessWidget {
   List<DocumentSnapshot> posts=[];
   String headline="";
   HorizontalList({required this.headline,required this.posts,Key? key}) : super(key: key);
+
+  List<Comentariu> getComentarii(DocumentSnapshot id)
+  {
+    List<Comentariu> cmts=[];
+    if(id.data["comments"]!=null)
+      {
+        for(int i=0;i<id.data["comments"].length;i++)
+          {
+            cmts.add(Comentariu(
+              author: id.data["comments"][i],
+              comment: id.data["comments"][i],
+            ));
+          }
+      }
+    return cmts;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +50,7 @@ class HorizontalList extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) =>  PostMenu(
-                              posts[index],posts[index].data["comments"]
+                              posts[index],getComentarii(posts[index])
                             ),
                           ),
                       );
