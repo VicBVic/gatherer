@@ -32,7 +32,7 @@ class HorizontalList extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) =>  PostMenu(
-                              posts[index].data["path"],
+                              posts[index],posts[index].data["comments"]
                             ),
                           ),
                       );

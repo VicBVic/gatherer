@@ -1,9 +1,11 @@
 import 'package:clean_our_cities/menus/post_menu.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class PostImage extends StatelessWidget {
-  String link="";
-  PostImage({required this.link,Key? key}) : super(key: key);
+  DocumentSnapshot document;
+  List comments=[];
+  PostImage({required this.document, required this.comments,Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +17,12 @@ class PostImage extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(builder: (context) =>  PostMenu(
-                link
+                document,comments,
               ))
           );
         },
         child: Image(
-          image: NetworkImage(link),
+          image: NetworkImage(document.data["path"]),
         ),
       ),
     );
