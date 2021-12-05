@@ -27,7 +27,6 @@ class _PostMenuState extends State<PostMenu> {
           "comments": FieldValue.arrayUnion([comentariu]),
         }
     );
-    print("done bitch");
   }
   final _formKey = GlobalKey<FormState>();
   late FocusNode myFocusNode;
@@ -67,42 +66,42 @@ class _PostMenuState extends State<PostMenu> {
               ),
             ),
           ),
+          SliverToBoxAdapter(
+            child: Container(
+              color: Colors.grey[800],
+              child: Column(
+                children: [
+                  PostUser(widget.postId.data["uid"]),
+                  Image(
+                      image: NetworkImage(
+                        widget.postId.data["path"],
+                      )),
+                  PostButtons(),
+                ],
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+              child: Text(
+                widget.postId.data["description"],
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+          ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                if (index == 0) {
-                  return Container(
-                    color: Colors.grey[800],
-                    child: Column(
-                      children: [
-                        PostUser(widget.postId.data["uid"]),
-                        Image(
-                            image: NetworkImage(
-                          widget.postId.data["path"],
-                        )),
-                        PostButtons(),
-                      ],
-                    ),
-                  );
-                } else if (index == 1) {
-                  return Text(
-                    widget.postId.data["description"],
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  );
-                }
-                if (index == widget.comentarii.length + 2)
-                  return Container(
-                    height: 50,
-                  );
-                else
-                  return widget.comentarii[index - 2];
-                //else return Comentariu(comment:'comentarr $index',author: "auth",);
+                  return widget.comentarii[index];
               },
-              childCount: widget.comentarii.length + 3,
+              childCount: widget.comentarii.length,
             ),
+          ),
+          SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.only(top: 50),
+              ),
           ),
         ],
       ),
