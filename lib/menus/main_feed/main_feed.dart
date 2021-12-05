@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:clean_our_cities/post/postare.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:clean_our_cities/menus/main_feed/main_feettape.dart';
+import 'package:clean_our_cities/menus/main_feed/new_arrivals.dart';
 
 class MainFeed extends StatefulWidget {
   const MainFeed({Key? key}) : super(key: key);
@@ -32,14 +34,9 @@ class _MainFeedState extends State<MainFeed> {
             ),
           ),
         ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index){
-                return Postare(postId:posts[index]);
-              },
-              childCount: posts.length,
-          ),
-        ),
+        HorizontalList(posts: posts,headline: "Latest posts",),
+        HorizontalList(posts: posts,headline: "Events near you",),
+        MainFeettape(posts: posts),
       ],
     );
   }

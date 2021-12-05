@@ -10,7 +10,7 @@ class PostImage extends StatelessWidget {
     return Container(
       color: Theme.of(context).colorScheme.primary,
       padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
-      child: FlatButton(
+      child: TextButton(
         onPressed: () {
           Navigator.push(
               context,

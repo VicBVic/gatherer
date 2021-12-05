@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:clean_our_cities/menus/main_feed/main_feed.dart';
 import 'package:flutter/material.dart';
 import 'package:clean_our_cities/scaffold_main.dart';
 import 'package:clean_our_cities/post/postare.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         textTheme: ThemeData.dark().textTheme,
       ),
       darkTheme: ThemeData(),
-      home: Menu(),
+      home: MainFeed(),
     );
   }
 }
