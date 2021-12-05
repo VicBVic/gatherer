@@ -13,7 +13,7 @@ import '../share_button.dart';
 class Postare extends StatefulWidget {
   DocumentSnapshot postId;
 
-  var comentarii = [Comentariu()];
+  var comentarii = [];
   
   Postare({required this.postId,Key? key}) : super(key: key);
   @override
@@ -22,6 +22,16 @@ class Postare extends StatefulWidget {
 
 class _PostareState extends State<Postare> {
   Widget build(BuildContext context) {
+    if(widget.postId.data["comments"]!=null)
+      {
+        for(int i=0; i<widget.postId.data["comments"].length; i++)
+        {
+          widget.comentarii.add(Comentariu(
+            author: widget.postId.data["comments"][0],
+            comment: widget.postId.data["comments"][0],
+          ));
+        }
+      }
     return Container(
       height: MediaQuery.of(context).size.height/1.5,
       color: Theme.of(context).colorScheme.background,
