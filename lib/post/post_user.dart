@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class PostUser extends StatelessWidget {
-  const PostUser({Key? key}) : super(key: key);
+
+  String uid="";
+
+  PostUser({required this.uid,Key? key}) : super(key: key);
 
 
 

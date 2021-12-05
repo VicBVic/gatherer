@@ -43,7 +43,7 @@ class _PostareState extends State<Postare> {
           Flexible(
               fit:FlexFit.tight,
               flex: 1,
-              child: PostUser(),
+              child: PostUser(uid:widget.postId.data["uid"]),
           ),
           PostTitle(widget.postId.data["title"]),
           Flexible(
