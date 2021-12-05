@@ -1,5 +1,6 @@
 import 'package:clean_our_cities/menus/post_menu.dart';
 import 'package:clean_our_cities/post/post_image.dart';
+import 'package:clean_our_cities/profilAlt.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -17,11 +18,17 @@ class Postare extends StatefulWidget {
   
   Postare({required this.postId,Key? key}) : super(key: key);
   @override
-  _PostareState createState() => _PostareState();
+  _PostareState createState() => _PostareState(postId.data["user"]);
 }
 
 class _PostareState extends State<Postare> {
+  String uid;
+  _PostareState(String this.uid);
 
+  _toProfile(){
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfilAlt(uid)));
+  }
+  
   Widget build(BuildContext context) {
     if(widget.postId.data["comments"]!=null)
       {
@@ -43,7 +50,10 @@ class _PostareState extends State<Postare> {
           Flexible(
               fit:FlexFit.tight,
               flex: 1,
-              child: PostUser(widget.postId.data["uid"]),
+              child: GestureDetector(
+                onTap: _toProfile,
+                child: PostUser(widget.postId.data["uid"]),
+              )
           ),
           PostTitle(widget.postId.data["title"]),
           Flexible(
