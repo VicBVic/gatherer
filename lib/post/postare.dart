@@ -21,6 +21,7 @@ class Postare extends StatefulWidget {
 }
 
 class _PostareState extends State<Postare> {
+
   Widget build(BuildContext context) {
     if(widget.postId.data["comments"]!=null)
       {
@@ -43,7 +44,7 @@ class _PostareState extends State<Postare> {
           Flexible(
               fit:FlexFit.tight,
               flex: 1,
-              child: PostUser(uid:widget.postId.data["uid"]),
+              child: PostUser(widget.postId.data["uid"]),
           ),
           PostTitle(widget.postId.data["title"]),
           Flexible(
