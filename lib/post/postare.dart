@@ -22,13 +22,6 @@ class Postare extends StatefulWidget {
 
 class _PostareState extends State<Postare> {
   Widget build(BuildContext context) {
-    for(int i=0; i<widget.postId.data["comments"].length; i++)
-      {
-        widget.comentarii.add(Comentariu(
-          author: widget.postId.data["comments"][0],
-          comment: widget.postId.data["comments"][0],
-        ));
-      }
     return Container(
       height: MediaQuery.of(context).size.height/1.5,
       color: Theme.of(context).colorScheme.background,
