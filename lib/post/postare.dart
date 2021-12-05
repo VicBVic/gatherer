@@ -21,6 +21,7 @@ class Postare extends StatefulWidget {
 }
 
 class _PostareState extends State<Postare> {
+
   Widget build(BuildContext context) {
     for(int i=0; i<widget.postId.data["comments"].length; i++)
       {
