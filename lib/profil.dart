@@ -31,9 +31,9 @@ class _ProfilState extends State<Profil> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
-  final prof= TextEditingController();
-  final loc=TextEditingController() ;
-  final desc =TextEditingController();
+  TextEditingController prof= TextEditingController();
+  TextEditingController loc=TextEditingController() ;
+  TextEditingController desc =TextEditingController();
 
   Widget wii = Text("No image selected");
 
@@ -48,15 +48,22 @@ class _ProfilState extends State<Profil> with SingleTickerProviderStateMixin {
   }
 
   _getimage() async {
-    _getData();
     final imagePicker = ImagePicker();
     final image = await imagePicker.pickImage(source: ImageSource.gallery);
+    String p= await uploadImage(File(image!.path));
     Firestore.instance.collection("profiles").document("${(await FirebaseAuth.instance.currentUser()).uid}").updateData({
-      "image": await uploadImage(File(image!.path)),
+      "image": p,
+    });
+    setState(() {
+      wii=Image(image: NetworkImage(p));
     });
 }
 
+  bool flag =false;
+
   _getData()async{
+    if(flag)return;
+    flag=true;
     await Firestore.instance.collection("profiles").document("${(await FirebaseAuth.instance.currentUser()).uid}").get().then((value) =>{
       for(var v in value.data.entries){
         if(v.key=="image"&&v.value!=""){
@@ -65,13 +72,19 @@ class _ProfilState extends State<Profil> with SingleTickerProviderStateMixin {
           })
         },
         if(v.key=="descriere"){
-          desc.text=v.value,
+          setState((){
+            desc.text=v.value;
+          })
         },
         if(v.key=="profesie"){
-          prof.text=v.value,
+          setState((){
+            prof.text=v.value;
+          })
         },
         if(v.key=="locatie"){
-          loc.text=v.value,
+          setState((){
+            loc.text=v.value;
+          })
         },
       }
     });
@@ -83,6 +96,7 @@ class _ProfilState extends State<Profil> with SingleTickerProviderStateMixin {
       "locatie": loc.text,
       "profesie": prof.text,
     });
+
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context)=>ScaffoldMain()),
@@ -94,12 +108,12 @@ class _ProfilState extends State<Profil> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     _getData();
     return MaterialApp(
-        title: "Sign Up",
+        title: "Profile",
         theme: ThemeData.dark(),
         darkTheme: ThemeData.dark(),
         home: Scaffold(
           appBar: AppBar(
-            title: const Text("Sign Up"),
+            title: const Text("Profile"),
           ),
           body: Center(
             child: Container(
@@ -113,19 +127,19 @@ class _ProfilState extends State<Profil> with SingleTickerProviderStateMixin {
                       ),
                       TextField(
                         controller: prof,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: "Profession",
                         ),
                       ),
                       TextField(
                         controller: loc,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: "Location",
                         ),
                       ),
                       TextField(
                         controller: desc,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: "Description",
                         ),
                       ),

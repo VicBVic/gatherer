@@ -69,12 +69,12 @@ class _ProfilAltState extends State<ProfilAlt> with SingleTickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: "Sign Up",
+        title: "Profile",
         theme: ThemeData.dark(),
         darkTheme: ThemeData.dark(),
         home: Scaffold(
           appBar: AppBar(
-            title: const Text("Sign Up"),
+            title: const Text("Profile"),
           ),
           body: Center(
             child: Container(
