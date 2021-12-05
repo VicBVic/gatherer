@@ -5,29 +5,47 @@ import 'package:clean_our_cities/share_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:clean_our_cities/post/postare.dart';
+import 'package:clean_our_cities/comentariu.dart';
 import 'dart:developer' as developer;
 
 class PostMenu extends StatefulWidget {
   DocumentSnapshot postId;
   var comentarii;
+  var comentariu;
   PostMenu(DocumentSnapshot this.postId, var this.comentarii, {Key? key})
       : super(key: key);
-
-  List<String> comments = [];
-  int comment_number = 0;
-
-  void posteazaComentariu(String comentariu) {
-    developer.log(comentariu);
-  }
 
   @override
   _PostMenuState createState() => _PostMenuState();
 }
 
 class _PostMenuState extends State<PostMenu> {
+
+  void posteazaComentariu(String comentariu) {
+    setState(() {
+      widget.comentarii.add(Comentariu(comment: comentariu,));
+    });
+  }
+  final _formKey = GlobalKey<FormState>();
+  late FocusNode myFocusNode;
+
+  @override
+  void initState() {
+    super.initState();
+
+    myFocusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    // Clean up the focus node when the Form is disposed.
+    myFocusNode.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -87,8 +105,9 @@ class _PostMenuState extends State<PostMenu> {
         ],
       ),
       bottomSheet: Form(
+        key: _formKey,
         child: TextFormField(
-          key: _formKey,
+          focusNode: myFocusNode,
           decoration: const InputDecoration(
             icon: Icon(Icons.comment),
             hintText: 'Enter comment',
@@ -98,7 +117,8 @@ class _PostMenuState extends State<PostMenu> {
             if (value == null || value.isEmpty) {
               return 'Please enter some text';
             }
-            widget.comments.add(value);
+            developer.log("${myFocusNode.hasFocus}");
+            widget.comentariu = value;
             return null;
           },
           onEditingComplete: () {
@@ -137,13 +157,20 @@ class _PostMenuState extends State<PostMenu> {
                                 ElevatedButton(
                                   onPressed: () {
                                     Navigator.of(context).pop();
+                                    myFocusNode.requestFocus();
+                                    myFocusNode.unfocus();
                                   },
                                   child: Text('Cancel'),
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
-                                    widget.posteazaComentariu(widget
-                                        .comments[widget.comments.length - 1]);
+                                    if (_formKey.currentState!.validate()){
+                                        posteazaComentariu(widget.comentariu);
+                                      }
+                                    Navigator.of(context).pop();
+                                    developer.log("${myFocusNode.hasFocus}");
+                                    myFocusNode.requestFocus();
+                                    myFocusNode.unfocus();
                                   },
                                   child: Text('Post'),
                                 ),
