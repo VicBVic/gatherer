@@ -39,7 +39,7 @@ class _ProfilState extends State<Profil> with SingleTickerProviderStateMixin {
 
   Future<String> uploadImage(File img) async {
     StorageReference ref = FirebaseStorage().ref().child(
-        img.hashCode.toString());
+    img.hashCode.toString());
     StorageUploadTask uploadTask = ref.putFile(img);
 
     var dowurl = await (await uploadTask.onComplete).ref.getDownloadURL();
