@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         textTheme: ThemeData.dark().textTheme,
       ),
       darkTheme: ThemeData(),
-      home: MainFeed(),
+      home:  ScaffoldMain(),
     );
   }
 }
