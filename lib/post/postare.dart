@@ -1,4 +1,5 @@
 import 'package:clean_our_cities/menus/post_menu.dart';
+import 'package:clean_our_cities/post/post_buttons.dart';
 import 'package:clean_our_cities/post/post_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,7 @@ import 'package:clean_our_cities/post/post_title.dart';
 import 'package:clean_our_cities/post/post_user.dart';
 
 import '../comentariu.dart';
-import '../like_button.dart';
+import '../going_button.dart';
 import '../share_button.dart';
 
 class Postare extends StatefulWidget {
@@ -50,16 +51,7 @@ class _PostareState extends State<Postare> {
               flex: 6,
               child:PostImage(document:widget.postId,comments:widget.comentarii),
               ),
-          Container(
-            color:Theme.of(context).colorScheme.background,
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                GoingButton(),
-                ShareButton(),
-              ],
-            ),
-          ),
+          PostButtons(),
         ],
       ),
     );

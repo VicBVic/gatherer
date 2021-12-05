@@ -1,5 +1,6 @@
 import 'package:clean_our_cities/comentariu.dart';
-import 'package:clean_our_cities/like_button.dart';
+import 'package:clean_our_cities/going_button.dart';
+import 'package:clean_our_cities/post/post_buttons.dart';
 import 'package:clean_our_cities/post/post_user.dart';
 import 'package:clean_our_cities/share_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -75,12 +76,7 @@ class _PostMenuState extends State<PostMenu> {
                             image: NetworkImage(
                           widget.postId.data["path"],
                         )),
-                        Row(
-                          children: [
-                            GoingButton(),
-                            ShareButton(),
-                          ],
-                        ),
+                        PostButtons(),
                       ],
                     ),
                   );
