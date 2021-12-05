@@ -8,9 +8,11 @@ class MainFeettape extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(posts.length);
     return SliverList(
       delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index){
+              print("${posts.length} here");
           return Postare(postId:posts[index]);
         },
         childCount: posts.length,

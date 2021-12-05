@@ -28,11 +28,12 @@ class _PostareState extends State<Postare> {
         for(int i=0; i<widget.postId.data["comments"].length; i++)
         {
           widget.comentarii.add(Comentariu(
-            author: widget.postId.data["comments"][0],
-            comment: widget.postId.data["comments"][0],
+            author: widget.postId.data["comments"][i],
+            comment: widget.postId.data["comments"][i],
           ));
         }
       }
+    //print(widget.comentarii);
     return Container(
       height: MediaQuery.of(context).size.height/1.5,
       color: Theme.of(context).colorScheme.background,
