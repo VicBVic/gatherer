@@ -1,13 +1,11 @@
-import 'dart:developer';
-import 'dart:io';
-//import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:clean_our_cities/profil.dart';
 import 'package:clean_our_cities/scaffold_main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -88,9 +86,17 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
             "phoneNumber" : phone.text,
           }
         );
+        Firestore.instance.collection("profiles").document("${use.uid}").setData(
+            {
+              "image" : "",
+              "profesie": "",
+              "descriere": "",
+              "locatie": "",
+            }
+        );
         Navigator.pushAndRemoveUntil(
             context, 
-            MaterialPageRoute(builder: (context)=>ScaffoldMain()),
+            MaterialPageRoute(builder: (context)=>Profil()),
             (route) => false,
         );
     } catch(error){
