@@ -19,7 +19,6 @@ class _MainFeedState extends State<MainFeed> {
 
 
     if(posts.isEmpty){Firestore.instance.collection("Posts").getDocuments().then((value) => setState((){posts=value.documents;})); return Center(child:Text("hold on..."));}
-
     return CustomScrollView(
 
       slivers: [

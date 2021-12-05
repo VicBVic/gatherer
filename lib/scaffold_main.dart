@@ -14,16 +14,16 @@ class ScaffoldMain extends StatefulWidget {
 }
 
 class _ScaffoldMainState extends State<ScaffoldMain> {
+  var menus = [MainFeed(), Account(), CreearePostare()];
 
-  var menus=[MainFeed(),Account(),CreearePostare()];
-
-  int currentIndex=0;
-  int getIndex(){
+  int currentIndex = 0;
+  int getIndex() {
     return currentIndex;
   }
-  void changeIndex(int newInd){
+
+  void changeIndex(int newInd) {
     setState(() {
-      currentIndex=newInd;
+      currentIndex = newInd;
     });
   }
 
