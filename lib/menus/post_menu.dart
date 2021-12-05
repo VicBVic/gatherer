@@ -49,7 +49,7 @@ class _PostMenuState extends State<PostMenu> {
                               )),
                               Row(
                                 children: [
-                                  LikeButton(),
+                                  GoingButton(),
                                   ShareButton(),
                                 ],
                               ),

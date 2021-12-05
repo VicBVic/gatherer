@@ -13,7 +13,7 @@ class PostButtons extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
-          LikeButton(),
+          GoingButton(),
           ShareButton(),
         ],
       ),
