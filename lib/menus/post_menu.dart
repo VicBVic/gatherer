@@ -74,7 +74,7 @@ class _PostMenuState extends State<PostMenu> {
                     color: Colors.grey[800],
                     child: Column(
                       children: [
-                        PostUser(),
+                        PostUser(widget.postId.data["uid"]),
                         Image(
                             image: NetworkImage(
                           widget.postId.data["path"],
