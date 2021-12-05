@@ -172,6 +172,11 @@ class _FormDeCreeareState extends State<FormDeCreeare> {
                       "description":post.description,
                     },
                   );
+                  FirebaseAuth.instance.currentUser().then((value) => Firestore.instance.collection("Posts").document(token).updateData(
+                    {
+                      "uid":value,
+                    },
+                  ));
                   uploadImageToFirebase(context,token);
                 }
               },
