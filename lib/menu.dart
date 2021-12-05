@@ -1,7 +1,7 @@
+import 'package:clean_our_cities/scaffold_main.dart';
 import 'package:clean_our_cities/signup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:clean_our_cities/signup.dart';
 import 'package:clean_our_cities/login.dart';
 
 class Menu extends StatefulWidget {
@@ -46,19 +46,35 @@ class _MenuState extends State<Menu> with SingleTickerProviderStateMixin {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ElevatedButton(
-                      onPressed:()=> Navigator.push(
+                  Container(
+                    padding: const EdgeInsets.only(top: 20),
+                      child: ElevatedButton(
+                        onPressed:()=> Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => SignUp()),
+                        ),
+                        child: Text("Sign Up"),
                       ),
-                      child: Text("Sign Up"),
                   ),
-                  ElevatedButton(
-                      onPressed: ()=>Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context)=> LogIn()),
+                  Container(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: ElevatedButton(
+                      onPressed:()=> Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LogIn()),
                       ),
                       child: Text("Log In"),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: ElevatedButton(
+                      onPressed:()=> Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ScaffoldMain()),
+                      ),
+                      child: Text("Bypass"),
+                    ),
                   ),
                 ],
               ),
