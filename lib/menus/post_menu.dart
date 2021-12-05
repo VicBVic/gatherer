@@ -10,11 +10,10 @@ import 'dart:developer' as developer;
 
 class PostMenu extends StatefulWidget {
   DocumentSnapshot postId;
-  var comentarii;
+  var comentarii = [];
   var comentariu;
   PostMenu(DocumentSnapshot this.postId, var this.comentarii, {Key? key})
       : super(key: key);
-
   @override
   _PostMenuState createState() => _PostMenuState();
 }
@@ -46,6 +45,9 @@ class _PostMenuState extends State<PostMenu> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.comentarii == null){
+      widget.comentarii = [];
+    }
     return Scaffold(
       body: CustomScrollView(
         slivers: [
