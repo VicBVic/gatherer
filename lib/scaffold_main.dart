@@ -1,3 +1,4 @@
+import 'package:clean_our_cities/account.dart';
 import 'package:clean_our_cities/navigation_bar_main.dart';
 import 'package:flutter/material.dart';
 import 'package:clean_our_cities/post/postare.dart';
@@ -14,7 +15,7 @@ class ScaffoldMain extends StatefulWidget {
 
 class _ScaffoldMainState extends State<ScaffoldMain> {
 
-  var menus=[MainFeed(),Settings(),CreearePostare()];
+  var menus=[MainFeed(),Account(),CreearePostare()];
 
   int currentIndex=0;
   int getIndex(){

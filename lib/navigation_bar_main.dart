@@ -27,7 +27,7 @@ class _NavigationBarMainState extends State<NavigationBarMain> {
 
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.settings),
+          icon: Icon(Icons.person),
           backgroundColor: Theme.of(context).colorScheme.secondary,
           label:"Account",
 
