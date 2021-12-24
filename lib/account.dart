@@ -47,12 +47,12 @@ class _AccountState extends State<Account> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Menu",
+      title: "Your Account",
       theme: ThemeData.dark(),
       darkTheme: ThemeData.dark(),
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Menu"),
+          title: Text("Your Account"),
         ),
         body:CustomScrollView(
           slivers: [

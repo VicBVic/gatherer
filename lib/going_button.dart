@@ -11,17 +11,25 @@ class GoingButton extends StatefulWidget {
 class _GoingButtonState extends State<GoingButton> {
   IconData currentIcon=Icons.notifications_rounded;
   int going = 10;
-  bool userGoing=false;//nush cv random
+  bool userGoing=false;
   @override
   Widget build(BuildContext context) {
     return Flexible(
       fit:FlexFit.tight,
       child: ElevatedButton(
         onPressed: (){
-          setState(() {
-            currentIcon=Icons.notifications_on_rounded;
-            userGoing=true;
-          });
+          if(userGoing==false)
+            {
+              setState(() {
+                currentIcon=Icons.notifications_on_rounded;
+                userGoing=true;
+              });
+            } else {
+            setState(() {
+              currentIcon=Icons.notifications_rounded;
+              userGoing=false;
+            });
+          }
         },
         child: Row(
           children: [
