@@ -33,6 +33,11 @@ class _NavigationBarMainState extends State<NavigationBarMain> {
 
         ),
         BottomNavigationBarItem(
+          icon: Icon(Icons.checklist),
+          backgroundColor: Theme.of(context).colorScheme.secondary,
+          label:"Going To",
+        ),
+        BottomNavigationBarItem(
           icon: Icon(Icons.add_box),
           backgroundColor: Theme.of(context).colorScheme.secondary,
           label:"Make Post",
