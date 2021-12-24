@@ -1,7 +1,7 @@
 import 'package:clean_our_cities/menus/post_menu.dart';
 import 'package:clean_our_cities/post/post_buttons.dart';
 import 'package:clean_our_cities/post/post_image.dart';
-import 'package:clean_our_cities/profilAlt.dart';
+import 'package:clean_our_cities/profil_alt.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
