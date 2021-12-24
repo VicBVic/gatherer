@@ -9,25 +9,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfilAlt extends StatefulWidget {
-  String? uid;
+  String uid;
 
-  ProfilAlt(String _uid) {
-    uid = _uid;
-  }
+  ProfilAlt(String this.uid);
 
   @override
-  _ProfilAltState createState() => _ProfilAltState(uid!);
+  _ProfilAltState createState() => _ProfilAltState(uid);
 }
 
 class _ProfilAltState extends State<ProfilAlt>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
-  String? uid;
-
-  _ProfilAltState(String _uid) {
-    uid = _uid;
-  }
+  String uid;
+  _ProfilAltState(String this.uid);
 
   @override
   void initState() {
@@ -44,9 +39,13 @@ class _ProfilAltState extends State<ProfilAlt>
   String desc = "";
   String prof = "";
   String loc = "";
-  Widget? wii;
+  Widget wii = Text("");
+
+  bool flag = false;
 
   _getData() {
+    if (flag) return;
+    flag = true;
     Firestore.instance
         .collection("profiles")
         .document(uid)
@@ -62,15 +61,21 @@ class _ProfilAltState extends State<ProfilAlt>
                     },
                   if (v.key == "descriere")
                     {
-                      desc = v.value,
+                      setState(() {
+                        desc = v.value;
+                      })
                     },
                   if (v.key == "profesie")
                     {
-                      prof = v.value,
+                      setState(() {
+                        prof = v.value;
+                      })
                     },
                   if (v.key == "locatie")
                     {
-                      loc = v.value,
+                      setState(() {
+                        loc = v.value;
+                      })
                     },
                 }
             });
@@ -78,6 +83,7 @@ class _ProfilAltState extends State<ProfilAlt>
 
   @override
   Widget build(BuildContext context) {
+    _getData();
     return MaterialApp(
         title: "Profile",
         theme: ThemeData.dark(),
@@ -92,7 +98,7 @@ class _ProfilAltState extends State<ProfilAlt>
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    wii!,
+                    wii,
                     Text(prof),
                     Text(loc),
                     Text(desc),
