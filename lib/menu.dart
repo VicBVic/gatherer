@@ -66,16 +66,6 @@ class _MenuState extends State<Menu> with SingleTickerProviderStateMixin {
                       child: Text("Log In"),
                     ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.only(top: 20),
-                    child: ElevatedButton(
-                      onPressed:()=> Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ScaffoldMain()),
-                      ),
-                      child: Text("Bypass"),
-                    ),
-                  ),
                 ],
               ),
             ),
