@@ -6,4 +6,4 @@
   
 ## Credits
   
-  This app was made by Botnaru Victor(me), [Acatrinei Robert-Marian](https://github.com/RobBobBot), [Stanescu Matei-Octavian](https://github.com/OctaVianu8) and [Stanciu Rares](https://github.com/Rareshika)
+  This app was made by Botnaru Victor(me), [Acatrinei Robert-Marian](https://github.com/RobBobBot), [Stanescu Matei-Octavian](https://github.com/OctaVianu8) and [Stanciu Rares](https://github.com/Rareshika) in a 48h hackathon
